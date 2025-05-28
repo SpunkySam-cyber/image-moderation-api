@@ -31,45 +31,54 @@
   <h3>Your Token</h3>
   <pre id="tokenDisplay">Not logged in yet.</pre>
 
-  <script>
-    const API_BASE_URL = window.location.hostname === "127.0.0.1"
-      ? "http://127.0.0.1:8000"
-      : "https://image-moderation-api-production.up.railway.app";
+<script>
+  const API_BASE_URL = window.location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:8000"
+    : "https://image-moderation-api-production.up.railway.app";
 
-    async function register() {
-      const username = document.getElementById("regUsername").value;
-      const email = document.getElementById("regEmail").value;
-      const password = document.getElementById("regPassword").value;
+  async function register() {
+    const username = document.getElementById("regUsername").value;
+    const email = document.getElementById("regEmail").value;
+    const password = document.getElementById("regPassword").value;
 
-      const res = await fetch(`${API_BASE_URL}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
+    const res = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
 
-      const data = await res.json();
-      alert(data.message || data.detail || "Registration complete.");
+    if (!res.ok) {
+      const text = await res.text();
+      alert("Registration failed: " + text);
+      return;
     }
 
-    async function login() {
-      const username = document.getElementById("loginUsername").value;
-      const password = document.getElementById("loginPassword").value;
+    const data = await res.json();
+    alert(data.message || data.detail || "Registration complete.");
+  }
 
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+  async function login() {
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
 
-      const data = await res.json();
-      if (res.ok) {
-        document.getElementById("tokenDisplay").textContent = data.access_token;
-        localStorage.setItem("token", data.access_token);
-      } else {
-        alert(data.detail || "Login failed.");
-      }
+    const res = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      alert("Login failed: " + text);
+      return;
     }
-  </script>
+
+    const data = await res.json();
+    document.getElementById("tokenDisplay").textContent = data.access_token;
+    localStorage.setItem("token", data.access_token);
+  }
+</script>
+
 
 </body>
 </html>
