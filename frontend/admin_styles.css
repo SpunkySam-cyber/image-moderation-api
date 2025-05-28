@@ -74,7 +74,10 @@ button.action-btn {
   width: auto; 
   background-color: var(--danger-color); 
   border-radius: 4px; 
-  font-size: 0.8em; }
+  font-size: 0.8em; 
+  white-space: nowrap;
+
+}
 
 button.action-btn:hover {
   background-color: #c0392b;
