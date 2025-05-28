@@ -16,19 +16,20 @@ app = FastAPI(
 frontend_dir = "frontend"
 app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
-
-@app.get("/admin")
+# ✅ Renamed to avoid conflict with /admin router
+@app.get("/admin-page")
 async def serve_admin():
     return FileResponse(os.path.join(frontend_dir, "admin.html"))
 
-@app.get("/moderation")
+# ✅ Renamed to avoid conflict with /moderate router
+@app.get("/moderation-page")
 async def serve_moderation():
     return FileResponse(os.path.join(frontend_dir, "moderation.html"))
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
