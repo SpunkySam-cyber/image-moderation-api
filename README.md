@@ -15,6 +15,9 @@ This project implements an **Image Moderation API** that allows users to upload 
 - **API Design & Security**  
   Developed a RESTful API with secure bearer token authentication, restricting access to admin/user roles appropriately.
 
+- **Admin Endpoint**  
+  A `/admin` endpoint allows users with admin access to check users info and usage info.
+
 - **Token Management & Tracking**  
   MongoDB is used to store tokens and log all moderation requests made by users.
 
