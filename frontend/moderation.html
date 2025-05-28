@@ -20,6 +20,10 @@
   <pre id="response">No response yet.</pre>
 
   <script>
+    const API_BASE_URL = window.location.hostname === "127.0.0.1"
+      ? "http://127.0.0.1:8000"
+      : "https://image-moderation-api-production.up.railway.app";
+
     document.getElementById('submit-btn').addEventListener('click', async () => {
       const token = document.getElementById('token').value.trim();
       const fileInput = document.getElementById('image');
@@ -39,7 +43,7 @@
       formData.append('file', file);
 
       try {
-        const res = await fetch('http://127.0.0.1:8000/moderate/', {
+        const res = await fetch(`${API_BASE_URL}/moderate/`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
