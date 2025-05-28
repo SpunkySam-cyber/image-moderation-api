@@ -35,6 +35,10 @@
   <pre id="usage-logs">No logs loaded yet.</pre>
 
   <script>
+    const API_BASE_URL = window.location.hostname === "127.0.0.1"
+      ? "http://127.0.0.1:8000"
+      : "https://image-moderation-api-production.up.railway.app";
+
     const adminTokenInput = document.getElementById('admin-token');
     const tokensTableBody = document.querySelector('#tokens-table tbody');
     const usageLogsPre = document.getElementById('usage-logs');
@@ -53,7 +57,7 @@
 
     async function fetchTokens() {
       try {
-        const res = await fetch('http://127.0.0.1:8000/admin/tokens', {
+        const res = await fetch(`${API_BASE_URL}/admin/tokens`, {
           headers: getAuthHeaders()
         });
         if (!res.ok) {
@@ -101,7 +105,7 @@
     }
 
     async function updateTokenStatus(token, action) {
-      const url = `http://127.0.0.1:8000/admin/tokens/revoke`;
+      const url = `${API_BASE_URL}/admin/tokens/revoke`;
       try {
         const res = await fetch(url, {
           method: 'POST',
@@ -121,7 +125,7 @@
 
     async function fetchUsageLogs() {
       try {
-        const res = await fetch('http://127.0.0.1:8000/admin/usages', {
+        const res = await fetch(`${API_BASE_URL}/admin/usages`, {
           headers: getAuthHeaders()
         });
         if (!res.ok) {
