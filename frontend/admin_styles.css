@@ -69,14 +69,12 @@ button:hover {
 }
 
 
-button.action-btn {
-  padding: 8px 16px;    /* increased padding */
-  min-width: 80px;      /* ensures minimum width */
-  background-color: var(--danger-color);
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
+button.action-btn { 
+  padding: 6px 10px; 
+  width: auto; 
+  background-color: var(--danger-color); 
+  border-radius: 4px; 
+  font-size: 0.8em; }
 
 button.action-btn:hover {
   background-color: #c0392b;
