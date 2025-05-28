@@ -31,6 +31,12 @@
   <h3>Your Token</h3>
   <pre id="tokenDisplay">Not logged in yet.</pre>
 
+  <!-- Navigation Buttons -->
+  <div class="navigation-buttons">
+    <button onclick="goToModeration()">Go to Moderation Page</button>
+    <button onclick="goToAdmin()">Go to Admin Page</button>
+  </div>
+
 <script>
   const API_BASE_URL = window.location.hostname === "127.0.0.1"
     ? "http://127.0.0.1:8000"
@@ -77,8 +83,15 @@
     document.getElementById("tokenDisplay").textContent = data.access_token;
     localStorage.setItem("token", data.access_token);
   }
-</script>
 
+  function goToModeration() {
+    window.location.href = "/moderation.html";
+  }
+
+  function goToAdmin() {
+    window.location.href = "/admin.html";
+  }
+</script>
 
 </body>
 </html>
