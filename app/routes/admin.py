@@ -42,9 +42,16 @@ async def list_usages(current_user: str = Depends(verify_admin_token)):
     return formatted_usages
 
 
+from pydantic import BaseModel
+
+class TokenRevokeRequest(BaseModel):
+    token: str
+
 @router.post("/tokens/revoke", summary="Revoke a token (admin only)")
-async def revoke_token(token: str, current_user: str = Depends(verify_admin_token)):
+async def revoke_token(request: TokenRevokeRequest, current_user: str = Depends(verify_admin_token)):
+    token = request.token
     result = await db.tokens.update_one({"token": token}, {"$set": {"revoked": True}})
     if result.modified_count == 0:
         raise HTTPException(status_code=404, detail="Token not found or already revoked")
     return {"message": f"Token {token} revoked successfully"}
+
