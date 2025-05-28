@@ -1,16 +1,16 @@
-# 🛡️ Image Moderation API
+# Image Moderation API
 
 A secure, token-authenticated **Image Moderation API** built using **FastAPI** with **MongoDB** integration for tracking token usage. Includes a minimal frontend to test moderation and manage tokens. The system simulates content moderation and provides admin/user role separation.
 
 ---
 
-## 📌 Project Description
+## Project Description
 
 This project implements an **Image Moderation API** that allows users to upload images and receive moderation feedback. Admins can generate and revoke tokens. The API uses **FastAPI** with **Bearer Token authentication** and stores all token data and usage logs in **MongoDB**. A lightweight frontend (HTML/CSS/JS) enables user-friendly interaction with the system.
 
 ---
 
-### 🎯 Objectives Addressed
+### Objectives Addressed
 
 - **API Design & Security**  
   Developed a RESTful API with secure bearer token authentication, restricting access to admin/user roles appropriately.
@@ -29,7 +29,7 @@ This project implements an **Image Moderation API** that allows users to upload 
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone the Repository
 
