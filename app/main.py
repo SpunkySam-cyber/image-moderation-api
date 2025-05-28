@@ -14,7 +14,11 @@ app = FastAPI(
 
 # Serve static frontend at root
 frontend_dir = "frontend"
-app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
+@app.get("/")
+async def serve_home():
+    return FileResponse(os.path.join(frontend_dir, "index.html"))
+
 
 # ✅ Renamed to avoid conflict with /admin router
 @app.get("/admin-page")
