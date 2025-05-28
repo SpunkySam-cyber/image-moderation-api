@@ -32,12 +32,16 @@
   <pre id="tokenDisplay">Not logged in yet.</pre>
 
   <script>
+    const API_BASE_URL = window.location.hostname === "127.0.0.1"
+      ? "http://127.0.0.1:8000"
+      : "https://image-moderation-api-production.up.railway.app";
+
     async function register() {
       const username = document.getElementById("regUsername").value;
       const email = document.getElementById("regEmail").value;
       const password = document.getElementById("regPassword").value;
 
-      const res = await fetch("http://127.0.0.1:8000/auth/register", {
+      const res = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -51,7 +55,7 @@
       const username = document.getElementById("loginUsername").value;
       const password = document.getElementById("loginPassword").value;
 
-      const res = await fetch("http://127.0.0.1:8000/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
